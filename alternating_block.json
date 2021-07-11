@@ -1,4 +1,4 @@
-//bridge-file-version: #14
+//This block suffers from some major problems. When you exit the game the blocks times some-what sync up but some are off. Since each block is on it's on timer they get wildy diffirent depending  on when you placed them relativley. Basically it's not good in practical use. I included a speed adjustment but that makes it even more janky.
 {
 	"format_version": "1.16.100",
 	"minecraft:block": {
