@@ -1,0 +1,210 @@
+{
+	"minecraft:block": {
+		"description": {
+			"properties": {
+				"bridge:block_rotation": [
+					2,
+					3,
+					4,
+					5
+				],
+				"ihg:mode2": [
+					false,
+					true
+				]
+			},
+			"identifier": "ihg:oak_shack"
+		},
+		"permutations": [
+			{
+				"condition": "query.block_property('bridge:block_rotation') == 2",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						0,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('bridge:block_rotation') == 3",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						180,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('bridge:block_rotation') == 4",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						90,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('bridge:block_rotation') == 5",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						270,
+						0
+					]
+				}
+			}
+		],
+		"components": {
+			"minecraft:on_player_placing": {
+				"event": "bridge:update_rotation"
+			},
+			"minecraft:on_interact": {
+				"event": "first"
+			},
+			"minecraft:unit_cube": {},
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "oak_shack_side",
+					"render_method": "opaque",
+					"face_dimming": true
+				},
+				"up": {
+					"texture": "arrow",
+					"render_method": "opaque",
+					"face_dimming": true
+				}
+			},
+			"minecraft:on_player_destroyed": {
+				"event": "dumb"
+			},
+			"minecraft:on_placed": {
+				"event": "info",
+				"condition": "query.block_property('ihg:mode2') == false"
+			}
+		},
+		"events": {
+			"bridge:update_rotation": {
+				"set_block_property": {
+					"bridge:block_rotation": "query.cardinal_facing_2d"
+				}
+			},
+			"first": {
+				"sequence": [
+					{
+						"condition": "!query.is_sneaking && query.block_property('ihg:mode2') == false",
+						"set_block_property": {
+							"ihg:mode2": true
+						},
+						"run_command": {
+							"command": [
+								"structure load 5x5 ~ ~1 ~",
+								"tellraw @p {\"rawtext\":[{\"text\":\"Do NOT break this block in creative when your in this mode!\"}]}"
+							]
+						}
+					},
+					{
+						"condition": "!query.is_sneaking && query.block_property('ihg:mode2') == true",
+						"sequence": [
+							{
+								"condition": "query.block_property('bridge:block_rotation') == 2",
+								"run_command": {
+									"command": [
+										"structure load oak_shack ~-2 ~-1 ~-2 180_degrees"
+									]
+								}
+							},
+							{
+								"condition": "query.block_property('bridge:block_rotation') == 3",
+								"run_command": {
+									"command": [
+										"structure load oak_shack ~-2 ~-1 ~-2"
+									]
+								}
+							},
+							{
+								"condition": "query.block_property('bridge:block_rotation') == 4",
+								"run_command": {
+									"command": [
+										"structure load oak_shack ~-2 ~-1 ~-2 90_degrees"
+									]
+								}
+							},
+							{
+								"condition": "query.block_property('bridge:block_rotation') == 5",
+								"run_command": {
+									"command": [
+										"structure load oak_shack ~-2 ~-1 ~-2 270_degrees"
+									]
+								}
+							},
+							{
+								"run_command": {
+									"command": [
+										"tellraw @p {\"rawtext\":[{\"text\":\"§aOak Shack has generated\"}]}"
+									]
+								}
+							}
+						]
+					},
+					{
+						"sequence": [
+							{
+								"condition": "query.block_property('bridge:block_rotation') == 5",
+								"set_block_property": {
+									"bridge:block_rotation": 2
+								}
+							},
+							{
+								"condition": "query.is_sneaking && query.block_property('bridge:block_rotation') < 5",
+								"set_block_property": {
+									"bridge:block_rotation": "query.block_property('bridge:block_rotation') +1"
+								}
+							}
+						],
+						"condition": "query.block_property('ihg:mode2') == false && query.is_sneaking"
+					},
+					{
+						"condition": "query.is_sneaking",
+						"set_block_at_pos": {
+							"block_type": "minecraft:air",
+							"block_offset": [
+								0,
+								1,
+								0
+							]
+						},
+						"set_block_property": {
+							"ihg:mode2": false
+						}
+					}
+				]
+			},
+			"dumb": {
+				"sequence": [
+					{
+						"condition": "query.block_property('ihg:mode2') == true",
+						"set_block_at_pos": {
+							"block_type": "minecraft:air",
+							"block_offset": [
+								0,
+								1,
+								0
+							]
+						}
+					}
+				]
+			},
+			"info": {
+				"run_command": {
+					"command": [
+						"tellraw @p {\"rawtext\":[{\"text\":\"§aShift and Right Click to change the direction. Interact while not sneaking to go into the placement mode. When in the placement mode interact to place the structure or sneak and interact to cancel. You can't rotate when in placement mode!\"}]}"
+					]
+				}
+			}
+		}
+	},
+	"format_version": "1.16.100"
+}
