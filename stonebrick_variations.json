@@ -1,0 +1,48 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "ihg:stonebrick_variations"
+		},
+		"components": {
+			"minecraft:on_placed": {
+				"event": "change"
+			},
+			"minecraft:unit_cube": {},
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "stonebrick",
+					"render_method": "opaque"
+				}
+			}
+		},
+		"events": {
+			"change": {
+				"randomize": [
+					{
+						"weight": 2,
+						"set_block": {
+							"block_type": "minecraft:stonebrick"
+						}
+					},
+					{
+						"weight": 1,
+						"run_command": {
+							"command": [
+								"setblock ~ ~ ~ stonebrick 1"
+							]
+						}
+					},
+					{
+						"weight": 1,
+						"run_command": {
+							"command": [
+								"setblock ~ ~ ~ stonebrick 2"
+							]
+						}
+					}
+				]
+			}
+		}
+	}
+}
