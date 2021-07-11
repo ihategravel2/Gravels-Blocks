@@ -1,0 +1,81 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "ihg:base_block",
+			"properties": {
+				"ihg:base": [
+					false,
+					true
+				]
+			}
+		},
+		"components": {
+			"minecraft:unit_cube": {},
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "cobblestone",
+					"render_method": "opaque",
+					"face_dimming": true,
+					"ambient_occlusion": true
+				}
+			},
+			"minecraft:ticking": {
+				"looping": false,
+				"range": [
+					0,
+					0
+				],
+				"on_tick": {
+					"event": "no"
+				}
+			},
+			"minecraft:on_placed": {
+				"event": "start"
+			}
+		},
+		"events": {
+			"start": {
+				"run_command": {
+					"command": [
+						"fill ~ ~ ~ ~ ~-1 ~ ihg:base_block 0 replace air",
+						"fill ~ ~ ~ ~ ~-1 ~ ihg:base_block 0 replace water",
+						"fill ~ ~ ~ ~ ~-1 ~ ihg:base_block 0 replace flowing_water",
+						"fill ~ ~ ~ ~ ~-1 ~ ihg:base_block 0 replace tallgrass",
+						"fill ~ ~ ~ ~ ~-1 ~ ihg:base_block 0 replace leaves",
+						"fill ~ ~ ~ ~ ~-1 ~ ihg:base_block 0 replace leaves2",
+						"fill ~ ~ ~ ~ ~-1 ~ ihg:base_block 0 replace seagrass",
+						"fill ~ ~ ~ ~ ~-1 ~ ihg:base_block 0 replace waterlily",
+						"fill ~ ~ ~ ~ ~-1 ~ ihg:base_block 0 replace vine",
+						"fill ~ ~ ~ ~ ~-1 ~ ihg:base_block 0 replace double_plant"
+					]
+				},
+				"set_block_property": {
+					"ihg:base": true
+				}
+			},
+			"place": {
+				"set_block": {
+					"block_type": "ihg:cobblestone_variations"
+				}
+			}
+		},
+		"permutations": [
+			{
+				"condition": "query.block_property('ihg:base') == true",
+				"components": {
+					"minecraft:ticking": {
+						"looping": false,
+						"range": [
+							0,
+							0
+						],
+						"on_tick": {
+							"event": "place"
+						}
+					}
+				}
+			}
+		]
+	}
+}
