@@ -1,0 +1,245 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"properties": {
+				"bridge:block_rotation": [
+					2,
+					3,
+					4,
+					5
+				],
+				"ihg:set": [
+					1,
+					2,
+					3,
+					4,
+					5,
+					6
+				]
+			},
+			"identifier": "ihg:oak_planks_raised_walkway"
+		},
+		"permutations": [
+			{
+				"condition": "query.block_property('bridge:block_rotation') == 2",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						180,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('bridge:block_rotation') == 3",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						0,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('bridge:block_rotation') == 4",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						270,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('bridge:block_rotation') == 5",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						90,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:set') == 1",
+				"components": {
+					"minecraft:geometry": "geometry.raised_sidewalk"
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:set') == 2",
+				"components": {
+					"minecraft:geometry": "geometry.raised_walkway_corner_left"
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:set') == 3",
+				"components": {
+					"minecraft:geometry": "geometry.raised_walkway_corner"
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:set') == 4",
+				"components": {
+					"minecraft:geometry": "geometry.raised_walkway_cross"
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:set') == 5",
+				"components": {
+					"minecraft:geometry": "geometry.raised_wooden_walkway_open_left"
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:set') == 6",
+				"components": {
+					"minecraft:geometry": "geometry.raised_wooden_walkway_open_right"
+				}
+			}
+		],
+		"components": {
+			"minecraft:on_player_placing": {
+				"event": "bridge:update_rotation"
+			},
+			"minecraft:on_interact": {
+				"event": "destroy",
+				"condition": "query.block_face == 1.0 && query.get_equipped_item_name('main_hand') == 'wrench'"
+			},
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "wood_oak",
+					"render_method": "opaque",
+					"ambient_occlusion": true,
+					"face_dimming": true
+				}
+			},
+			"minecraft:entity_collision": {
+				"origin": [
+					-8,
+					0,
+					-8
+				],
+				"size": [
+					16,
+					5,
+					16
+				]
+			},
+			"minecraft:pick_collision": {
+				"origin": [
+					-8,
+					0,
+					-8
+				],
+				"size": [
+					16,
+					5,
+					16
+				]
+			},
+			"minecraft:block_light_absorption": 0,
+			"minecraft:ticking": {
+				"looping": false,
+				"range": [
+					0,
+					0
+				],
+				"on_tick": {
+					"event": "scaf"
+				}
+			}
+		},
+		"events": {
+			"bridge:update_rotation": {
+				"set_block_property": {
+					"bridge:block_rotation": "query.cardinal_facing_2d",
+					"ihg:set": "q.scoreboard('walkway')"
+				}
+			},
+			"destroy": {
+				"sequence": [
+					{
+						"condition": "query.block_face == 1.0 && query.get_equipped_item_name('main_hand') == 'oak_planks_raised_walkway'",
+						"run_command": {
+							"command": [
+								"fill ~ ~1 ~ ~ ~1 ~ air 0 replace ihg:oak_planks_raised_walkway"
+							]
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:set') < 6 && query.get_equipped_item_name('main_hand') == 'wrench'",
+						"set_block_property": {
+							"ihg:set": "query.block_property('ihg:set') +1"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:set') == 6",
+						"set_block_property": {
+							"ihg:set": 1
+						}
+					},
+					{
+						"sequence": [
+							{
+								"condition": "q.block_property('ihg:set') == 1",
+								"run_command": {
+									"command": [
+										"scoreboard players set @p walkway 2"
+									]
+								}
+							},
+							{
+								"condition": "q.block_property('ihg:set') == 2",
+								"run_command": {
+									"command": [
+										"scoreboard players set @p walkway 3"
+									]
+								}
+							},
+							{
+								"condition": "q.block_property('ihg:set') == 3",
+								"run_command": {
+									"command": [
+										"scoreboard players set @p walkway 4"
+									]
+								}
+							},
+							{
+								"condition": "q.block_property('ihg:set') == 4",
+								"run_command": {
+									"command": [
+										"scoreboard players set @p walkway 5"
+									]
+								}
+							},
+							{
+								"condition": "q.block_property('ihg:set') == 5",
+								"run_command": {
+									"command": [
+										"scoreboard players set @p walkway 6"
+									]
+								}
+							},
+							{
+								"condition": "q.block_property('ihg:set') == 6",
+								"run_command": {
+									"command": [
+										"scoreboard players set @p walkway 1"
+									]
+								}
+							}
+						]
+					}
+				]
+			},
+			"scaf": {
+				"run_command": {
+					"command": [
+						"fill ~ ~-1 ~ ~ ~-1 ~ ihg:oak_planks_walkway_scaffolding 0 replace air"
+					]
+				}
+			}
+		}
+	}
+}
