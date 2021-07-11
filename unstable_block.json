@@ -1,0 +1,310 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "ihg:unstable_block",
+			"properties": {
+				"ihg:texture": [
+					1,
+					2,
+					3,
+					4,
+					5,
+					6,
+					7,
+					8,
+					9,
+					10,
+					11,
+					12,
+					13,
+					14,
+					15,
+					16
+				],
+				"ihg:broke": [
+					false,
+					true
+				]
+			}
+		},
+		"components": {
+			"minecraft:on_step_on": {
+				"event": "start"
+			},
+			"minecraft:unit_cube": {},
+			"minecraft:destroy_time": 999999,
+			"minecraft:explosion_resistance": 999999,
+			"minecraft:loot": "loot_tables/empty.json",
+			"minecraft:on_interact": {
+				"event": "change",
+				"condition": "query.get_equipped_item_name == 'wrench' "
+			}
+		},
+		"events": {
+			"start": {
+				"run_command": {
+					"command": [
+						"playsound block.scaffolding.break @p ~ ~ ~"
+					]
+				},
+				"set_block_property": {
+					"ihg:broke": true
+				}
+			},
+			"change": {
+				"sequence": [
+					{
+						"condition": "query.block_property('ihg:texture') < 16",
+						"set_block_property": {
+							"ihg:texture": "query.block_property('ihg:texture') +1"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:texture') == 16",
+						"set_block_property": {
+							"ihg:texture": 1
+						}
+					}
+				]
+			},
+			"reset": {
+				"set_block_property": {
+					"ihg:broke": false
+				}
+			}
+		},
+		"permutations": [
+			{
+				"condition": "query.block_property('ihg:texture') == 1",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "cobblestone",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 2",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "cobblestone_mossy",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 3",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "dirt",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 4",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "iron_block",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 5",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "gold_block",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 6",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "diamond_block",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 7",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "emerald_block",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 8",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "netherite_block",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 9",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "glowstone",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 10",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "wood_acacia",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 11",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "wood_big_oak",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 12",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "wood_birch",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 13",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "wood_jungle",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 14",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "wood_oak",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 15",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "wood_spruce",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:texture') == 16",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "cobbled_deepslate",
+							"render_method": "opaque",
+							"face_dimming": true,
+							"ambient_occlusion": false
+						}
+					}
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:broke') == true",
+				"components": {
+					"minecraft:entity_collision": false,
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "disabled",
+							"render_method": "blend"
+						}
+					},
+					"minecraft:ticking": {
+						"looping": false,
+						"range": [
+							5,
+							5
+						],
+						"on_tick": {
+							"event": "reset"
+						}
+					}
+				}
+			}
+		]
+	}
+}
