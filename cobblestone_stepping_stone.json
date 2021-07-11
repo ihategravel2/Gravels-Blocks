@@ -1,0 +1,58 @@
+//bridge-file-version: #10
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "ihg:stone_paving_stone"
+		},
+		"components": {
+			"minecraft:geometry": "geometry.stepping_stone",
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "stone",
+					"render_method": "opaque",
+					"face_dimming": true,
+					"ambient_occlusion": true
+				}
+			},
+			"minecraft:entity_collision": {
+				"size": [
+					14,
+					2,
+					14
+				],
+				"origin": [
+					-7,
+					0,
+					-7
+				]
+			},
+			"minecraft:pick_collision": {
+				"size": [
+					14,
+					2,
+					14
+				],
+				"origin": [
+					-7,
+					0,
+					-7
+				]
+			},
+			"minecraft:block_light_absorption": 0,
+			"minecraft:on_interact": {
+				"condition": "query.block_face == 1.0 && query.get_equipped_item_name('main_hand') == 'stone_paving_stone'",
+				"event": "destroy"
+			}
+		},
+		"events": {
+			"destroy": {
+				"run_command": {
+					"command": [
+						"fill ~ ~1 ~ ~ ~1 ~ air 0 replace ihg:stone_paving_stone"
+					]
+				}
+			}
+		}
+	}
+}
