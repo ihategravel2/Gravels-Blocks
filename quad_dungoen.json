@@ -1,0 +1,70 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "ihg:quad_dungeon"
+		},
+		"components": {
+			"minecraft:ticking": {
+				"looping": true,
+				"range": [
+					0,
+					0
+				],
+				"on_tick": {
+					"event": "spawn"
+				}
+			}
+		},
+		"events": {
+			"spawn": {
+				"randomize": [
+					{
+						"run_command": {
+							"command": [
+								"structure load quadruple_dungeon ~ ~ ~"
+							]
+						},
+						"weight": 1,
+						"set_block": {
+							"block_type": "minecraft:air"
+						}
+					},
+					{
+						"run_command": {
+							"command": [
+								"structure load quadruple_dungeon ~ ~- ~ 180_degrees"
+							]
+						},
+						"weight": 1,
+						"set_block": {
+							"block_type": "minecraft:air"
+						}
+					},
+					{
+						"run_command": {
+							"command": [
+								"structure load quadruple_dungeon ~ ~ ~ 270_degrees"
+							]
+						},
+						"weight": 1,
+						"set_block": {
+							"block_type": "minecraft:air"
+						}
+					},
+					{
+						"run_command": {
+							"command": [
+								"structure load quadruple_dungeon ~ ~ ~ 90_degrees"
+							]
+						},
+						"weight": 1,
+						"set_block": {
+							"block_type": "minecraft:air"
+						}
+					}
+				]
+			}
+		}
+	}
+}
