@@ -1,0 +1,33 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "ihg:death_block"
+		},
+		"components": {
+			"minecraft:destroy_time": 999999,
+			"minecraft:explosion_resistance": 999999,
+			"minecraft:unit_cube": {},
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "death_block",
+					"render_method": "opaque",
+					"ambient_occlusion": false,
+					"face_dimming": true
+				}
+			},
+			"minecraft:on_step_on": {
+				"event": "death"
+			}
+		},
+		"events": {
+			"death": {
+				"damage": {
+					"amount": 100,
+					"target": "other",
+					"type": "contact"
+				}
+			}
+		}
+	}
+}
