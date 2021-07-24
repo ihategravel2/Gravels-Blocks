@@ -1,0 +1,557 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"properties": {
+				"ihg:block_rotation": [
+					2,
+					3,
+					4,
+					5
+				],
+				"ihg:record": [
+					0,
+					1,
+					2,
+					3,
+					4,
+					5,
+					6,
+					7,
+					8,
+					9,
+					10,
+					11,
+					12,
+					13
+				],
+				"ihg:inserted": [
+					false,
+					true
+				],
+				"ihg:reset": [
+					false,
+					true
+				],
+				"ihg:is_playing": [
+					false,
+					true
+				]
+			},
+			"identifier": "ihg:better_jukebox"
+		},
+		"permutations": [
+			{
+				"condition": "query.block_property('ihg:block_rotation') == 2",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						180,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:block_rotation') == 3",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						0,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:block_rotation') == 4",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						270,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:block_rotation') == 5",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						90,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:inserted') == true\r",
+				"components": {
+					"minecraft:geometry": "geometry.jukebox_on"
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:reset') == true",
+				"components": {
+					"minecraft:ticking": {
+						"looping": false,
+						"range": [
+							0,
+							0
+						],
+						"on_tick": {
+							"event": "reset2"
+						}
+					}
+				}
+			}
+		],
+		"components": {
+			"minecraft:on_player_placing": {
+				"event": "ihg:update_rotation"
+			},
+			"minecraft:geometry": "geometry.jukebox",
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "juke",
+					"render_method": "opaque",
+					"ambient_occlusion": false,
+					"face_dimming": true
+				}
+			},
+			"minecraft:block_light_absorption": 0,
+			"minecraft:on_interact": {
+				"event": "stuff"
+			},
+			"minecraft:on_player_destroyed": {
+				"event": "break"
+			},
+			"minecraft:destroy_time": 2
+		},
+		"events": {
+			"ihg:update_rotation": {
+				"set_block_property": {
+					"ihg:block_rotation": "query.cardinal_facing_2d"
+				}
+			},
+			"stuff": {
+				"sequence": [
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_11' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 1,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.11 @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_13' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 2,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.13 @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_blocks' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 3,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.blocks @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_cat' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 4,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.cat @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_chirp' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 5,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.chirp @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_far' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 6,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.far @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_mall' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 7,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.mall @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_mellohi' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 8,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.mellohi @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_pigstep' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 9,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.pigstep @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_stal' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 10,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.stal @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_ward' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 11,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.ward @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_wait' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 12,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.wait @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "query.get_equipped_item_name('main_hand') == 'music_disc_strad' && q.block_property('ihg:inserted') == false",
+						"set_block_property": {
+							"ihg:is_playing": true,
+							"ihg:record": 13,
+							"ihg:inserted": true
+						},
+						"run_command": {
+							"command": [
+								"playsound record.strad @a[r=10] ~ ~ ~ 10"
+							],
+							"target": "other"
+						},
+						"decrement_stack": {
+							"ignore_game_mode": true
+						}
+					},
+					{
+						"condition": "q.block_property('ihg:inserted') == true",
+						"trigger": {
+							"event": "loot"
+						},
+						"run_command": {
+							"command": [
+								"stopsound @a"
+							]
+						},
+						"set_block_property": {
+							"ihg:reset": true
+						}
+					}
+				]
+			},
+			"loot": {
+				"sequence": [
+					{
+						"condition": "query.block_property('ihg:record') == 1",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_11.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 2",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_13.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 3",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_blocks.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 4",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_cat.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 5",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_chirp.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 6",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_far.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 7",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_mall.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 8",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_mellohi.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 9",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_pigstep.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 10",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_stal.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 13",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_strad.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 12",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_wait.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 11",
+						"spawn_loot": {
+							"table": "loot_tables/ward.json"
+						}
+					}
+				]
+			},
+			"reset2": {
+				"set_block_property": {
+					"ihg:record": 0,
+					"ihg:inserted": false,
+					"ihg:reset": false,
+					"ihg:is_playing": true
+				}
+			},
+			"break": {
+				"sequence": [
+					{
+						"condition": "query.block_property('ihg:record') == 1",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_11.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 2",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_13.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 3",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_blocks.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 4",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_cat.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 5",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_chirp.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 6",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_far.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 7",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_mall.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 8",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_mellohi.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 9",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_pigstep.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 10",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_stal.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 11",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_strad.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 12",
+						"spawn_loot": {
+							"table": "loot_tables/music_disc_wait.json"
+						}
+					},
+					{
+						"condition": "query.block_property('ihg:record') == 13",
+						"spawn_loot": {
+							"table": "loot_tables/ward.json"
+						}
+					}
+				],
+				"trigger": {
+					"event": "stop"
+				}
+			},
+			"stop": {
+				"run_command": {
+					"command": [
+						"stopsound @a"
+					]
+				}
+			}
+		}
+	}
+}
