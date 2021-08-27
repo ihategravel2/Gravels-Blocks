@@ -1,3 +1,4 @@
+//Block to very easily make ruined cobblestone structures. 
 {
 	"format_version": "1.16.100",
 	"minecraft:block": {
