@@ -1,3 +1,4 @@
+//Basically a block to put under your structure to make sure it has a proper base. Reccomened to place a random block beneadth your structure then use something like nbt studio to change it to the base block. 
 {
 	"format_version": "1.16.100",
 	"minecraft:block": {
