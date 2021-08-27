@@ -1,3 +1,4 @@
+//Block that detects the direction the block is facing and uses the new "q.block_neighbor_has_any_tag" tags to detect relative blocks with the same tags and change its geometry accordingly. If the block is facing North or South, the block test for East & West Directions. If the block is facing East or West, then the block test for North & South directions.
 {
 	"format_version": "1.16.100",
 	"minecraft:block": {
