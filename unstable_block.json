@@ -1,3 +1,4 @@
+//Pretty simple Parkour Type block that breaks once you step on it.
 {
 	"format_version": "1.16.100",
 	"minecraft:block": {
