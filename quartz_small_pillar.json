@@ -1,3 +1,4 @@
+//This is a good use of the new "q.block_neighbor_has_any_tag" query and the 'minecraft:part_visibility" componet.
 {
 	"format_version": "1.16.100",
 	"minecraft:block": {
