@@ -1,3 +1,4 @@
+//just loads in a structure in a random rotation upon placement. Can be utilised to get arouund structure bugs.
 {
 	"format_version": "1.16.100",
 	"minecraft:block": {
