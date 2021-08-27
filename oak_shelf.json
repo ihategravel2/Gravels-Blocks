@@ -1,0 +1,242 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "ihg:oak_shelf",
+			"properties": {
+				"ihg:state_up": [
+					false,
+					true
+				],
+				"ihg:state_side": [
+					0,
+					1,
+					2,
+					3
+				],
+				"ihg:block_rotation": [
+					2,
+					3,
+					4,
+					5
+				]
+			}
+		},
+		"components": {
+			"minecraft:geometry": "geometry.shelf",
+			"minecraft:block_light_absorption": 0,
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "planks",
+					"render_method": "opaque",
+					"ambient_occlusion": true,
+					"face_dimming": true
+				}
+			},
+			"minecraft:part_visibility": {
+				"rules": {
+					"left": "query.block_property('ihg:state_side') == 0 || query.block_property('ihg:state_side') == 1",
+					"right": "query.block_property('ihg:state_side') == 0 || query.block_property('ihg:state_side') == 2",
+					"bottom": "query.block_property('ihg:state_up') == false",
+					"bottom_left": "query.block_property('ihg:state_up') == false",
+					"bottom_right": "query.block_property('ihg:state_up') == false"
+				}
+			},
+			"minecraft:ticking": {
+				"looping": true,
+				"range": [
+					0,
+					0
+				],
+				"on_tick": {
+					"event": "state_change"
+				}
+			},
+			"tag:shelf": {},
+			"minecraft:on_player_placing": {
+				"event": "ihg:update_rotation"
+			}
+		},
+		"events": {
+			"state_change": {
+				"sequence": [
+					{
+						"condition": "query.block_property('ihg:block_rotation')==2",
+						"sequence": [
+							{
+								"condition": "!q.block_neighbor_has_any_tag(-1,0,0,'shelf')&&!q.block_neighbor_has_any_tag(1,0,0,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 0
+								}
+							},
+							{
+								"condition": "q.block_neighbor_has_any_tag(-1,0,0,'shelf')&&q.block_neighbor_has_any_tag(1,0,0,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 3
+								}
+							},
+							{
+								"condition": "q.block_neighbor_has_any_tag(1,0,0,'shelf')&&!q.block_neighbor_has_any_tag(-1,0,0,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 1
+								}
+							},
+							{
+								"condition": "q.block_neighbor_has_any_tag(-1,0,0,'shelf')&&!q.block_neighbor_has_any_tag(1,0,0,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 2
+								}
+							}
+						]
+					},
+					{
+						"condition": "query.block_property('ihg:block_rotation')==3",
+						"sequence": [
+							{
+								"condition": "!q.block_neighbor_has_any_tag(-1,0,0,'shelf')&&!q.block_neighbor_has_any_tag(1,0,0,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 0
+								}
+							},
+							{
+								"condition": "q.block_neighbor_has_any_tag(-1,0,0,'shelf')&&q.block_neighbor_has_any_tag(1,0,0,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 3
+								}
+							},
+							{
+								"condition": "q.block_neighbor_has_any_tag(-1,0,0,'shelf')&&!q.block_neighbor_has_any_tag(1,0,0,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 1
+								}
+							},
+							{
+								"condition": "q.block_neighbor_has_any_tag(1,0,0,'shelf')&&!q.block_neighbor_has_any_tag(-1,0,0,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 2
+								}
+							}
+						]
+					},
+					{
+						"condition": "query.block_property('ihg:block_rotation')==4",
+						"sequence": [
+							{
+								"condition": "!q.block_neighbor_has_any_tag(0,0,1,'shelf')&&!q.block_neighbor_has_any_tag(0,0,-1,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 0
+								}
+							},
+							{
+								"condition": "q.block_neighbor_has_any_tag(0,0,1,'shelf')&&q.block_neighbor_has_any_tag(0,0,-1,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 3
+								}
+							},
+							{
+								"condition": "q.block_neighbor_has_any_tag(0,0,-1,'shelf')&&!q.block_neighbor_has_any_tag(0,0,1,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 1
+								}
+							},
+							{
+								"condition": "q.block_neighbor_has_any_tag(0,0,1,'shelf')&&!q.block_neighbor_has_any_tag(0,0,-1,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 2
+								}
+							}
+						]
+					},
+					{
+						"condition": "query.block_property('ihg:block_rotation')==5",
+						"sequence": [
+							{
+								"condition": "!q.block_neighbor_has_any_tag(0,0,-1,'shelf')&&!q.block_neighbor_has_any_tag(0,0,1,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 0
+								}
+							},
+							{
+								"condition": "q.block_neighbor_has_any_tag(0,0,-1,'shelf')&&q.block_neighbor_has_any_tag(0,0,1,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 3
+								}
+							},
+							{
+								"condition": "q.block_neighbor_has_any_tag(0,0,1,'shelf')&&!q.block_neighbor_has_any_tag(0,0,-1,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 1
+								}
+							},
+							{
+								"condition": "q.block_neighbor_has_any_tag(0,0,-1,'shelf')&&!q.block_neighbor_has_any_tag(0,0,1,'shelf')",
+								"set_block_property": {
+									"ihg:state_side": 2
+								}
+							}
+						]
+					},
+					{
+						"condition": "q.block_neighbor_has_any_tag(0,-1,0,'shelf')",
+						"set_block_property": {
+							"ihg:state_up": true
+						}
+					},
+					{
+						"condition": "!q.block_neighbor_has_any_tag(0,-1,0,'shelf')",
+						"set_block_property": {
+							"ihg:state_up": false
+						}
+					}
+				]
+			},
+			"ihg:update_rotation": {
+				"set_block_property": {
+					"ihg:block_rotation": "query.cardinal_facing_2d"
+				}
+			}
+		},
+		"permutations": [
+			{
+				"condition": "query.block_property('ihg:block_rotation') == 2",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						180,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:block_rotation') == 3",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						0,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:block_rotation') == 4",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						270,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:block_rotation') == 5",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						90,
+						0
+					]
+				}
+			}
+		]
+	}
+}
