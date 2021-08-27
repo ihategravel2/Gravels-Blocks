@@ -1,3 +1,4 @@
+//Note: Can be made much better with the new queries and "minecraft:part_visibility" componet.
 {
 	"format_version": "1.16.100",
 	"minecraft:block": {
