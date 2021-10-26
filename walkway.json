@@ -1,0 +1,126 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "ihg:walkway",
+			"properties": {
+				"ihg:state": [
+					0,
+					1,
+					2,
+					3,
+					4
+				],
+				"ihg:state_2": [
+					0,
+					1,
+					2,
+					3,
+					4
+				]
+			}
+		},
+		"components": {
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "planks",
+					"render_method": "opaque",
+					"face_dimming": true,
+					"ambient_occlusion": true
+				}
+			},
+			"minecraft:block_light_absorption": 0,
+			"minecraft:ticking": {
+				"looping": true,
+				"range": [
+					0,
+					0
+				],
+				"on_tick": {
+					"event": "state_change"
+				}
+			},
+			"minecraft:pick_collision": {
+				"size": [
+					16,
+					4,
+					16
+				]
+			},
+			"minecraft:entity_collision": {
+				"size": [
+					16,
+					3,
+					16
+				]
+			},
+			"minecraft:geometry": "geometry.walkway",
+			"minecraft:part_visibility": {
+				"rules": {
+					"front": "query.block_property('ihg:state') == 1 || query.block_property('ihg:state') == 0",
+					"back": "query.block_property('ihg:state') == 2 || query.block_property('ihg:state') == 0",
+					"left": "query.block_property('ihg:state_2') == 1 || query.block_property('ihg:state_2') == 0",
+					"right": "query.block_property('ihg:state_2') == 2 || query.block_property('ihg:state_2') == 0"
+				}
+			},
+			"tag:walkway": {},
+			"minecraft:creative_category": {
+				"category": "Construction"
+			}
+		},
+		"events": {
+			"state_change": {
+				"sequence": [
+					{
+						"condition": "q.block_neighbor_has_any_tag(0,0,1,'walkway')&&!q.block_neighbor_has_any_tag(0,0,-1,'walkway')",
+						"set_block_property": {
+							"ihg:state": 1
+						}
+					},
+					{
+						"condition": "q.block_neighbor_has_any_tag(0,0,-1,'walkway')&&!q.block_neighbor_has_any_tag(0,0,1,'walkway')",
+						"set_block_property": {
+							"ihg:state": 2
+						}
+					},
+					{
+						"condition": "!q.block_neighbor_has_any_tag(0,0,-1,'walkway')&&!q.block_neighbor_has_any_tag(0,0,1,'walkway')",
+						"set_block_property": {
+							"ihg:state": 0
+						}
+					},
+					{
+						"condition": "q.block_neighbor_has_any_tag(0,0,-1,'walkway')&&q.block_neighbor_has_any_tag(0,0,1,'walkway')",
+						"set_block_property": {
+							"ihg:state": 3
+						}
+					},
+					{
+						"condition": "q.block_neighbor_has_any_tag(-1,0,0,'walkway')&&!q.block_neighbor_has_any_tag(1,0,0,'walkway')",
+						"set_block_property": {
+							"ihg:state_2": 1
+						}
+					},
+					{
+						"condition": "!q.block_neighbor_has_any_tag(-1,0,0,'walkway')&&q.block_neighbor_has_any_tag(1,0,0,'walkway')",
+						"set_block_property": {
+							"ihg:state_2": 2
+						}
+					},
+					{
+						"condition": "!q.block_neighbor_has_any_tag(-1,0,0,'walkway')&&!q.block_neighbor_has_any_tag(1,0,0,'walkway')",
+						"set_block_property": {
+							"ihg:state_2": 0
+						}
+					},
+					{
+						"condition": "q.block_neighbor_has_any_tag(-1,0,0,'walkway')&&q.block_neighbor_has_any_tag(1,0,0,'walkway')",
+						"set_block_property": {
+							"ihg:state_2": 3
+						}
+					}
+				]
+			}
+		}
+	}
+}
