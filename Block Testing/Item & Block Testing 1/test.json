@@ -1,0 +1,71 @@
+{
+	"format_version": "1.17.40",
+	"minecraft:item": {
+		"description": {
+			"identifier": "ihg:test"
+		},
+		"components": {
+			"minecraft:icon": {
+				"texture": "axe"
+			},
+			"minecraft:durability": {
+				"max_durability": 7,
+				"damage_chance": {
+					"min": 100,
+					"max": 100
+				}
+			},
+			"minecraft:on_use_on": {
+				"on_use_on": {
+					"condition": "t.u=query.cardinal_facing;return 1;",
+					"event": "place"
+				}
+			}
+		},
+		"events": {
+			"ihg:damage": {
+				"damage": {
+					"type": "durability",
+					"amount": 1,
+					"target": "self"
+				}
+			},
+			"place": {
+				"sequence": [
+					{
+						"run_command": {
+							"command": [
+								"setblock ~ ~1 ~ ihg:dir_block"
+							]
+						},
+						"condition": "t.u==2"
+					},
+					{
+						"condition": "t.u==3",
+						"run_command": {
+							"command": [
+								"setblock ~ ~1 ~ ihg:dir_block"
+							]
+						}
+					},
+					{
+						"condition": "t.u==4",
+						"run_command": {
+							"command": [
+								"setblock ~ ~1 ~ ihg:dir_block"
+							]
+						}
+					},
+					{
+						"condition": "t.u==5",
+						"run_command": {
+							"command": [
+								"setblock ~ ~1 ~ ihg:dir_block"
+							]
+						}
+					}
+				]
+			}
+		}
+	}
+}
