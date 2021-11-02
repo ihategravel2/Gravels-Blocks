@@ -1,1 +1,3 @@
-Notes
+Notes - 11/2/21
+---------------
+Basic test of a item placing a block WITH rotation. 
