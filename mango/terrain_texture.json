@@ -1,0 +1,43 @@
+{
+	"num_mip_levels": 4,
+	"padding": 8,
+	"resource_pack_name": "Blocks Example Pack",
+	"texture_name": "atlas.terrain",
+	"texture_data": {
+		"ihg:mango_log_side": {
+			"textures": [
+				"textures/blocks/mango/mango_log_side"
+			]
+		},
+		"ihg:mango_log_top": {
+			"textures": [
+				"textures/blocks/mango/mango_log_top"
+			]
+		},
+		"ihg:stripped_mango_log_side": {
+			"textures": [
+				"textures/blocks/mango/stripepd_mango_log_side"
+			]
+		},
+		"ihg:stripped_mango_log_top": {
+			"textures": [
+				"textures/blocks/mango/stripped_mango_log_top"
+			]
+		},
+		"ihg:mango_leaves": {
+			"textures": [
+				"textures/blocks/mango/mango_leaves"
+			]
+		},
+		"ihg:mango_planks": {
+			"textures": [
+				"textures/blocks/mango/mango_planks"
+			]
+		},
+		"ihg:mango_trapdoor": {
+			"textures": [
+				"textures/blocks/mango/mango_planks"
+			]
+		}
+	}
+}

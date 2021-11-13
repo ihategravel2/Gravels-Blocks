@@ -1,0 +1,33 @@
+{
+	"format_version": [
+		1,
+		1,
+		0
+	],
+	"ihg:mango_trapdoor": {
+		"sound": "wood",
+		"isotropic": {
+			"up": true,
+			"down": true,
+			"side": true
+		}
+	},
+	"ihg:mango_log": {
+		"sound": "wood"
+	},
+	"ihg:stripped_mano_log": {
+		"sound": "wood"
+	},
+	"ihg:mango_leaves": {
+		"sound": "grass"
+	},
+	"ihg:mango_planks": {
+		"sound": "wood",
+		"isotropic": {
+			"up": true,
+			"down": true,
+			"side": true
+		},
+		"textures": "ihg:mango_planks"
+	}
+}
