@@ -1,0 +1,11 @@
+{
+	"format_version": "1.17.40",
+	"minecraft:block": {
+		"description": {
+			"identifier": "ihg:mango_planks"
+		},
+		"components": {
+			"minecraft:unit_cube": {}
+		}
+	}
+}

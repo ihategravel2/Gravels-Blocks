@@ -1,0 +1,124 @@
+{
+	"format_version": "1.17.40",
+	"minecraft:block": {
+		"description": {
+			"identifier": "ihg:mango_log",
+			"properties": {
+				"bridge:block_rotation": [
+					0,
+					1,
+					2
+				],
+				"ihg:is_stripped": [
+					false,
+					true
+				]
+			}
+		},
+		"components": {
+			"minecraft:unit_cube": {},
+			"minecraft:creative_category": {
+				"group": "itemGroup.name.log",
+				"category": "nature"
+			},
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "ihg:mango_log_side",
+					"render_method": "opaque"
+				},
+				"up": {
+					"texture": "ihg:mango_log_top",
+					"render_method": "opaque"
+				},
+				"down": {
+					"texture": "ihg:mango_log_top",
+					"render_method": "opaque"
+				}
+			},
+			"minecraft:breathability": "solid",
+			"minecraft:destroy_time": 2,
+			"tag:custom_wood": {},
+			"minecraft:explosion_resistance": 2,
+			"minecraft:flammable": {
+				"burn_odds": 1,
+				"flame_odds": 1
+			},
+			"minecraft:on_player_placing": {
+				"event": "bridge:update_rotation"
+			},
+			"minecraft:on_interact": {
+				"condition": "query.equipped_item_any_tag('slot.weapon.mainhand','minecraft:is_axe')&&!query.block_property('ihg:is_stripped')",
+				"event": "become_stripped"
+			}
+		},
+		"permutations": [
+			{
+				"condition": "query.block_property('bridge:block_rotation') == 0",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						0,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('bridge:block_rotation') == 1",
+				"components": {
+					"minecraft:rotation": [
+						90,
+						0,
+						0
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('bridge:block_rotation') == 2",
+				"components": {
+					"minecraft:rotation": [
+						0,
+						0,
+						90
+					]
+				}
+			},
+			{
+				"condition": "query.block_property('ihg:is_stripped')",
+				"components": {
+					"minecraft:loot": "loot_tables/stripped_mango_log.json",
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "ihg:stripped_mango_log_side",
+							"render_method": "opaque"
+						},
+						"up": {
+							"texture": "ihg:stripped_mango_log_top",
+							"render_method": "opaque"
+						},
+						"down": {
+							"texture": "ihg:stripped_mango_log_top",
+							"render_method": "opaque"
+						}
+					}
+				}
+			}
+		],
+		"events": {
+			"bridge:update_rotation": {
+				"set_block_property": {
+					"bridge:block_rotation": "math.floor(query.block_face/2)"
+				}
+			},
+			"become_stripped": {
+				"set_block_property": {
+					"ihg:is_stripped": true
+				},
+				"run_command": {
+					"command": [
+						"playsound hit.wood @a ~~~"
+					]
+				}
+			}
+		}
+	}
+}
